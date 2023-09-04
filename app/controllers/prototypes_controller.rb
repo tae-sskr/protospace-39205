@@ -20,6 +20,14 @@ class PrototypesController < ApplicationController
     end
   end
 
+  def set_prototype
+    @prototype = Prototype.find_by(id: params[:id])
+    unless @prototype.nil?
+      flash[:alert] = "プロトタイプが見つかりませんでした。"
+      redirect_to root_path
+    end
+  end  
+
   def show
     @comment = Comment.new
     @comments = @prototype.comments
